@@ -1,0 +1,2277 @@
+/**
+ * Component library: buttons, badges, cards, process timeline,
+ * section headings, forms, nav. Verify visually via the internal
+ * style-guide template before using in real templates.
+ */
+
+/* =========================================================
+   Section heading pattern — eyebrow + H2 + intro line.
+   Used to open nearly every homepage/internal section.
+   ========================================================= */
+
+.section-heading {
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.section-heading--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-heading__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.85rem;
+}
+
+.section-heading__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.5em;
+  height: 2px;
+  background: currentColor;
+}
+
+.section--dark .section-heading__eyebrow {
+  color: var(--color-primary-light);
+}
+
+.section-heading__title {
+  margin-bottom: 0.75rem;
+}
+
+.section-heading__intro {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+  line-height: var(--lh-body);
+}
+
+.section--dark .section-heading__intro {
+  color: var(--color-text-on-dark-muted);
+}
+
+/* =========================================================
+   Philosophy — brand-statement panel (§2)
+   ========================================================= */
+
+.philosophy-line {
+  display: block;
+  width: 4rem;
+  height: 2px;
+  margin: 0 auto 1.75rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+}
+
+/* =========================================================
+   About / Who We Are (§3)
+   ========================================================= */
+
+.about-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.about-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.9em 1.9em;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+[dir="rtl"] .btn::before {
+  transform-origin: right center;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+}
+
+.btn--primary::before {
+  background: var(--color-primary-dark);
+}
+
+.btn--primary:hover::before,
+.btn--primary:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+}
+
+.section--dark .btn--secondary {
+  color: var(--color-text-on-dark);
+  border-color: var(--color-border-on-dark);
+}
+
+.btn--secondary::before {
+  background: var(--color-text);
+  opacity: 0.06;
+}
+
+.btn--secondary:hover::before,
+.btn--secondary:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.btn--on-dark {
+  color: var(--color-text-on-dark);
+  border-color: var(--color-border-on-dark);
+}
+
+.btn--text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+}
+
+.btn--text::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: right center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+[dir="rtl"] .btn--text::after {
+  transform-origin: left center;
+}
+
+.btn--text:hover::after,
+.btn--text:focus-visible::after {
+  transform: scaleX(0);
+}
+
+.btn--text .icon {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+[dir="rtl"] .btn--text .icon {
+  transform: scaleX(-1);
+}
+
+.btn--text:hover .icon {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .btn--text:hover .icon {
+  transform: scaleX(-1) translateX(4px);
+}
+
+/* =========================================================
+   Badges — short value words (Speed, Precision, Comfort…)
+   ========================================================= */
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4em 1em;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary-dark);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.section--dark .badge {
+  background: color-mix(in srgb, var(--color-text-on-dark) 10%, transparent);
+  color: var(--color-text-on-dark);
+  border-color: var(--color-border-on-dark);
+}
+
+.badge--sm {
+  padding: 0.3em 0.85em;
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   Cards
+   ========================================================= */
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: clamp(1.5rem, 2vw, 2rem);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+
+.card--service {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  width: min(21rem, 82vw);
+  height: 100%;
+}
+
+.card--service .card__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-md);
+  transition:
+    background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.card--service .card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.card--service:hover .card__icon {
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  transform: scale(1.06);
+}
+
+/* The base .card--service width above (min(21rem, 82vw)) is only correct
+   for the standalone style-guide preview, where nothing else controls its
+   size. In the archive's CSS grid and the homepage Swiper carousel, an
+   ancestor already determines the real available width (the grid cell, or
+   Swiper's own computed/inline .swiper-slide width) — letting the card
+   additionally demand its own 82vw here fights that ancestor and can make
+   the card wider than the slide Swiper sized for it, overflowing the
+   slide (and, since that overflow sits above the slide/wrapper's own
+   clipping, the page) on narrow viewports. Both contexts fill instead. */
+.services-grid .card--service,
+.services-carousel__swiper .card--service {
+  width: 100%;
+}
+
+.card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.card__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+
+.card__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.card__title {
+  font-size: var(--fs-h4);
+  margin-bottom: 0.25rem;
+}
+
+.card__desc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+}
+
+.card__link {
+  margin-top: auto;
+}
+
+/* Pillar card (Why JETS) — icon-led, elevated card with a brand accent
+   bar that draws in on hover, echoing the .card--service treatment. */
+.card--pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card--pillar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.card--pillar:hover::before,
+.card--pillar.is-visible::before {
+  transform: scaleX(1);
+}
+
+.card--pillar .card__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-md);
+  transition:
+    background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.card--pillar .card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* Icon "draw-in" — a quick scale/opacity pop just after the card itself
+   settles, so the icon reads as its own small beat rather than arriving
+   glued to the card's fade. */
+@media (prefers-reduced-motion: no-preference) {
+  .card--pillar .card__icon {
+    opacity: 0;
+    transform: scale(0.5);
+    transition-delay: 150ms;
+  }
+
+  .card--pillar.is-visible .card__icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card--pillar:hover .card__icon {
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  transform: scale(1.06);
+}
+
+.card--pillar .card__title {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   Services carousel (Swiper — see assets/js/services-carousel.js).
+   The .swiper:not(.swiper-initialized) rules are a pre-JS/no-JS
+   fallback: a plain scroll-snap row, styled to match what Swiper
+   produces once it boots, so the section never renders broken.
+   ========================================================= */
+
+.carousel {
+  position: relative;
+}
+
+.services-carousel__swiper {
+  padding-block: 0.5rem 1rem;
+}
+
+.services-carousel__swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.services-carousel__swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.swiper:not(.swiper-initialized) {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--container-padding);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-light) transparent;
+}
+
+.swiper:not(.swiper-initialized) .swiper-slide {
+  width: min(21rem, 82vw);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.carousel__controls {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Arrows + pagination sit as a sibling of .services-carousel__swiper, not
+   inside it — so they aren't covered by Swiper's own overflow:hidden. With
+   up to 13 pagination bullets plus two 44px arrow buttons in one unwrapped
+   flex row (justify-content: center, no flex-wrap), the row's natural
+   width can exceed a phone's viewport and cause real horizontal page
+   scroll on mobile — confirmed live. Touch/swipe (Swiper's native
+   behavior) is already the primary interaction there, so the controls
+   are desktop-only chrome, matching the >=1024px line the header nav
+   already draws between mobile and desktop. */
+@media (min-width: 1024px) {
+  .js .carousel__controls {
+    display: flex;
+  }
+}
+
+.carousel__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.carousel__arrow svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.carousel__arrow:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-on-dark);
+}
+
+.carousel__arrow:active {
+  transform: scale(0.94);
+}
+
+.carousel__arrow.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+[dir="rtl"] .carousel__arrow svg {
+  transform: scaleX(-1);
+}
+
+.carousel__pagination {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.carousel__pagination .swiper-pagination-bullet {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: 0;
+  background: var(--color-border);
+  opacity: 1;
+  transition:
+    width var(--dur-base) var(--ease-out),
+    background var(--dur-fast) var(--ease-out),
+    border-radius var(--dur-base) var(--ease-out);
+}
+
+.carousel__pagination .swiper-pagination-bullet-active {
+  background: var(--color-primary);
+  width: 1.5rem;
+  border-radius: var(--radius-pill);
+}
+
+/* =========================================================
+   Process timeline (Corporate Travel, Group Travel & Events,
+   Transportation, Airport Services, Visa Services)
+   ========================================================= */
+
+.process-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  overflow-x: auto;
+  padding-block: 1rem;
+}
+
+.process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+  width: clamp(8rem, 14vw, 11rem);
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  inset-inline-start: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  z-index: -1;
+}
+
+.process-step:first-child::before {
+  display: none;
+}
+
+.section--dark .process-step::before {
+  background: var(--color-border-on-dark);
+}
+
+.process-step__index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-small);
+  margin-bottom: 0.85rem;
+}
+
+.process-step__title {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-small);
+}
+
+.process-step__desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 767px) {
+  .process-timeline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .process-step {
+    flex-direction: row;
+    text-align: start;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .process-step::before {
+    top: -0.75rem;
+    inset-inline-start: 1.1rem;
+    width: 2px;
+    height: 0.75rem;
+  }
+
+  .process-step__index {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+/* =========================================================
+   Delivery flow sections (How We Deliver) — each process flow is its
+   own full-width .section (curated photo + a plain "A → B → C" chain
+   of step titles, via the shared .split layout), alternating
+   .section--dark and .split--reverse for rhythm across the run. Steps
+   are a short ordered list, not a diagram, so no numbered nodes or
+   connector lines here — the horizontal .process-timeline above is
+   reserved for the future single-service template.
+   ========================================================= */
+
+.delivery-flow__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.delivery-flow__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delivery-flow__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.6rem;
+}
+
+.section--dark .delivery-flow__meta {
+  color: var(--color-primary-light);
+}
+
+.delivery-flow__title {
+  font-size: var(--fs-h3);
+  margin-bottom: 1.75rem;
+}
+
+.delivery-chain {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  line-height: 1.7;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.delivery-chain li {
+  display: block;
+  overflow-wrap: break-word;
+}
+
+.delivery-chain li:not(:last-child)::after {
+  content: "→" / "";
+  margin-inline: 0.5em;
+  color: var(--color-primary);
+  font-weight: var(--fw-regular);
+}
+
+.section--dark .delivery-chain li:not(:last-child)::after {
+  color: var(--color-primary-light);
+}
+
+[dir="rtl"] .delivery-chain li:not(:last-child)::after {
+  content: "←" / "";
+}
+
+.delivery-flow__badges {
+  margin-top: 1.75rem;
+}
+
+/* =========================================================
+   Experience-category panels (Where We Can Take You, §6)
+   ========================================================= */
+
+.experience-panels {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  padding-bottom: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.experience-panel {
+  position: relative;
+  flex: 1 1 0;
+  display: block;
+  height: clamp(280px, 34vw, 460px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* A subtle fanned/staggered skyline rather than a flat wall of tiles. */
+.experience-panel:nth-child(even) {
+  margin-top: clamp(1.25rem, 1rem + 1vw, 2.25rem);
+}
+
+.experience-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-secondary-rgb), 0.85) 0%,
+    rgba(var(--color-secondary-rgb), 0.05) 55%
+  );
+  pointer-events: none;
+}
+
+.experience-panel__media {
+  position: absolute;
+  inset: -8% 0;
+  width: 100%;
+  height: 116%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.experience-panel:hover .experience-panel__media {
+  transform: scale(1.05);
+}
+
+.experience-panel__label {
+  position: absolute;
+  z-index: 2;
+  inset-inline: 0.75rem;
+  bottom: 1rem;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body);
+  color: var(--color-text-on-dark);
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .experience-panels {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .experience-panel,
+  .experience-panel:nth-child(even) {
+    height: 220px;
+    margin-top: 0;
+  }
+}
+
+/* =========================================================
+   Technology (§8) — a simple device→pillar connector diagram
+   standing in for the brief's "device/dashboard-style graphic with
+   connecting nodes" (jets.pdf page 14) without needing literal UI
+   chrome. Connector paths use the pathLength="1" trick (each <path
+   pathLength="1">) so a plain stroke-dasharray/dashoffset transition
+   works regardless of the path's real geometry — a genuine SVG
+   connector-draw, not a CSS-only line, per PROJECT_CONTEXT.md §8's
+   animation table.
+   ========================================================= */
+
+.tech-diagram {
+  position: relative;
+  max-width: 640px;
+  margin: 3rem auto 0;
+}
+
+.tech-diagram__device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+}
+
+.tech-diagram__device svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.tech-diagram__connectors {
+  display: block;
+  width: 100%;
+  height: 70px;
+  color: var(--color-primary-light);
+  overflow: visible;
+}
+
+.tech-diagram__connectors path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tech-diagram__connectors path {
+    transition: stroke-dashoffset var(--dur-slow) var(--ease-out);
+  }
+
+  .tech-diagram.is-visible .tech-diagram__connectors path {
+    stroke-dashoffset: 0;
+  }
+
+  .tech-diagram__connectors path:nth-child(2) {
+    transition-delay: 90ms;
+  }
+
+  .tech-diagram__connectors path:nth-child(3) {
+    transition-delay: 180ms;
+  }
+
+  .tech-diagram__connectors path:nth-child(4) {
+    transition-delay: 270ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-diagram__connectors path {
+    stroke-dashoffset: 0;
+  }
+}
+
+.tech-diagram__nodes {
+  gap: 0.75rem;
+}
+
+/* The connector SVG above (.tech-diagram__connectors) draws each path to a
+   fixed x-position assuming its node sits in a single row, evenly spaced
+   across the diagram's full width (see section-technology.php's PHP —
+   x = (index + 0.5) / node_count * 400). The generic .grid--2/3/4
+   scaffold collapses to fewer columns (then 1) below 1024px/600px, which
+   is exactly right for card grids but wrong here: once the nodes wrap
+   into multiple rows, their real screen positions no longer match what
+   the SVG paths were drawn to, so the lines stop touching the dots on
+   mobile. Overriding back to the node-count's own column count keeps it
+   a single row — and therefore correctly aligned — at every breakpoint. */
+@media (max-width: 1023px) {
+  .tech-diagram__nodes.grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-diagram__nodes.grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tech-diagram__nodes.grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .tech-diagram__nodes.grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-diagram__nodes.grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tech-diagram__nodes.grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tech-diagram__nodes {
+    gap: 0.375rem;
+  }
+
+  .tech-diagram__node-label {
+    font-size: 0.6rem;
+    line-height: 1.2;
+  }
+}
+
+.tech-diagram__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.tech-diagram__node-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.tech-diagram__node-label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   Network & Who We Serve — dark full-bleed section (bookends the dark
+   Hero and hands off cleanly into the dark Final CTA panel right
+   after it) with a low-opacity connected-nodes backdrop standing in
+   for the brief's "stylized world-map/connection-line graphic"
+   without needing literal cartography. Three plain icon-led blocks
+   (no card chrome) sit above it — the backdrop already carries the
+   decoration, so the content stays quiet by comparison.
+   ========================================================= */
+
+.network-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.network-section__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  color: var(--color-primary-light);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.network-section__backdrop svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Backdrop is already a low-opacity decorative layer (0.16) — the generic
+   .reveal fade would otherwise snap it to full opacity and shift it via
+   translateY, so it gets its own target-opacity override here. */
+@media (prefers-reduced-motion: no-preference) {
+  .network-section__backdrop.reveal {
+    opacity: 0;
+    transform: none;
+    transition: opacity var(--dur-reveal) var(--ease-out);
+  }
+
+  .network-section__backdrop.reveal.is-visible {
+    opacity: 0.16;
+  }
+
+  /* Connector line draws in (stroke-dashoffset, pathLength="1" trick —
+     see the Technology diagram above for the same technique) slightly
+     after the backdrop's own opacity fade starts, rather than the whole
+     graphic simply materializing at once. */
+  .network-section__backdrop path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset var(--dur-slowest) var(--ease-out);
+    transition-delay: 150ms;
+  }
+
+  .network-section__backdrop.reveal.is-visible path {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-section__backdrop path {
+    stroke-dashoffset: 0;
+  }
+}
+
+.network-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.network-block__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-text-on-dark) 10%, transparent);
+  color: var(--color-primary-light);
+  margin-bottom: 1rem;
+}
+
+.network-block__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.network-block__title {
+  font-size: var(--fs-h4);
+  margin-bottom: 0.6rem;
+}
+
+.network-block__desc {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+}
+
+.network-block__tagline {
+  margin-top: 1rem;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary-light);
+}
+
+.network-block .badge-row {
+  margin-top: 1.25rem;
+}
+
+/* =========================================================
+   Contact page
+   ========================================================= */
+
+/* Intro panel — a real photo hero like single-service.php's, rather than
+   the plain centered section-heading every other internal page opens
+   with. Content anchors to the bottom third (where the source photo is
+   naturally darkest — empty seating/floor) instead of the panel's usual
+   vertical center, echoing the Hero's own "asymmetric, not centered over
+   the photo" art direction (PROJECT_CONTEXT.md §6.1) rather than
+   repeating the centered-text-over-image pattern that was explicitly
+   rejected there. The default .panel__scrim (dark-bottom/light-top) is
+   already the correct direction for this, so no custom scrim variant
+   is needed. */
+.contact-hero {
+  align-items: flex-end;
+  min-height: 52vh;
+}
+
+.contact-hero .panel__content {
+  padding-block-end: clamp(2rem, 4vw, 3.5rem);
+}
+
+.contact-hero .section-heading__intro {
+  color: var(--color-text-on-dark-muted);
+  max-width: 34rem;
+}
+
+/* Details column — icon-led rows instead of plain label/value stacks,
+   matching the icon-badge language already used for pillars/services. */
+
+.contact-details__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.contact-details__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+
+.contact-details__icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.contact-details__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-block-start: 0.4rem;
+}
+
+.contact-details__label {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.contact-details__value {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+a.contact-details__value:hover,
+a.contact-details__value:focus-visible {
+  color: var(--color-primary);
+}
+
+.contact-details__whatsapp {
+  margin-top: 0.5rem;
+}
+
+/* Form panel — a static, elevated container (border + soft shadow, no
+   hover lift) rather than the generic .card, since a hover-lift reads as
+   "this is clickable" and a form isn't. */
+.inquiry-form {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.inquiry-form__heading {
+  font-size: var(--fs-h4);
+  margin-bottom: 1.25rem;
+}
+
+/* Map embed — same elevated-container language as .inquiry-form
+   (border + soft shadow) so it reads as part of the same page, not a
+   raw third-party iframe dropped in. */
+.contact-map {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-map__frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border: 0;
+}
+
+/* =========================================================
+   Forms
+   ========================================================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.field__label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-muted);
+}
+
+.field__input,
+.field__textarea {
+  width: 100%;
+  padding: 0.85em 1em;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.field__textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+/* intl-tel-input (Contact page phone field, self-hosted — inc/enqueue.php)
+   wraps the .field__input in its own container; stretch it to match every
+   other field's full-width layout instead of the plugin's default
+   inline-block sizing. */
+.iti {
+  width: 100%;
+}
+
+.field__input:focus,
+.field__textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.field--error .field__input,
+.field--error .field__textarea {
+  border-color: var(--color-error);
+}
+
+.field__message {
+  font-size: var(--fs-small);
+}
+
+.field__message--error {
+  color: var(--color-error);
+}
+
+.form__status {
+  padding: 0.9em 1.2em;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  margin-bottom: 1.25rem;
+}
+
+.form__status--success {
+  background: color-mix(in srgb, var(--color-success) 12%, transparent);
+  color: var(--color-success);
+}
+
+.form__status--error {
+  background: color-mix(in srgb, var(--color-error) 12%, transparent);
+  color: var(--color-error);
+}
+
+/* =========================================================
+   Header / navigation (base look — sticky behavior added in Phase 4)
+   ========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-block: 1rem;
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-header__logo {
+  display: block;
+  height: 2.5rem;
+  width: auto;
+}
+
+.site-header__brand-name {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.site-header__menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2vw, 2.25rem);
+}
+
+.site-header__menu a {
+  position: relative;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-small);
+  padding-block: 0.4rem;
+}
+
+.site-header__menu a::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+[dir="rtl"] .site-header__menu a::after {
+  transform-origin: left center;
+}
+
+.site-header__menu a:hover::after,
+.site-header__menu a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---- Transparent-over-hero / solid-on-scroll (Phase 4) ---- */
+
+.site-header--transparent {
+  position: fixed;
+  inset-inline: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.site-header--transparent .site-header__brand-name,
+.site-header--transparent .site-header__menu a,
+.site-header--transparent .lang-switcher__item {
+  color: var(--color-text-on-dark);
+}
+
+.site-header--transparent .site-header__toggle-bar {
+  background: var(--color-text-on-dark);
+}
+
+.site-header--transparent.site-header--scrolled {
+  background: var(--color-bg);
+  border-bottom-color: var(--color-border);
+}
+
+.site-header--transparent.site-header--scrolled .site-header__brand-name,
+.site-header--transparent.site-header--scrolled .site-header__menu a,
+.site-header--transparent.site-header--scrolled .lang-switcher__item {
+  color: var(--color-text);
+}
+
+.site-header--transparent.site-header--scrolled .site-header__toggle-bar {
+  background: var(--color-text);
+}
+
+/* ---- Header actions (language switcher + mobile toggle) ---- */
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ---- WhatsApp button — one of exactly two site-wide CTA mechanisms
+   (PROJECT_CONTEXT.md §4), used in the header, mobile nav overlay,
+   footer, and Contact page. A solid filled circle/pill reads correctly
+   over both the transparent-over-hero and solid header states without
+   needing its own light/dark override, unlike text-based header links. */
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.whatsapp-btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.whatsapp-btn:hover,
+.whatsapp-btn:focus-visible {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.whatsapp-btn--labeled {
+  width: auto;
+  height: auto;
+  padding: 0.85em 1.4em;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+/* ---- Language switcher ---- */
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.lang-switcher__item {
+  /* min-height alone (not a fixed height) keeps the text vertically
+     centered without forcing a taller box than the content needs on
+     larger screens — this is the one language-switcher instance that's
+     visible at every breakpoint (including phones, since it isn't hidden
+     below the mobile-nav breakpoint the way .site-header__nav is), so its
+     touch target matters everywhere, not just in the overlay's own copy. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.375rem;
+  color: var(--color-text-muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.lang-switcher__item.is-active {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.lang-switcher__item:hover,
+.lang-switcher__item:focus-visible {
+  color: var(--color-primary);
+}
+
+.lang-switcher--mobile {
+  font-size: var(--fs-body);
+}
+
+/* ---- Mobile nav toggle (hamburger → X) ---- */
+
+.site-header__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.site-header__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: var(--radius-sm);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.nav-open .site-header__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-open .site-header__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-open .site-header__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Mobile full-screen overlay menu ---- */
+
+.nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.nav-mobile.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav-mobile__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--color-secondary-rgb), 0.4);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.nav-mobile.is-open .nav-mobile__scrim {
+  opacity: 1;
+}
+
+.nav-mobile__panel {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: min(22rem, 88vw);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--dur-slow) var(--ease-out);
+  overflow-y: auto;
+}
+
+[dir="rtl"] .nav-mobile__panel {
+  transform: translateX(-100%);
+}
+
+.nav-mobile.is-open .nav-mobile__panel {
+  transform: translateX(0);
+}
+
+.nav-mobile__panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.nav-mobile__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.75rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.nav-mobile__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nav-mobile__menu a {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+.nav-mobile__menu a:hover,
+.nav-mobile__menu a:focus-visible {
+  color: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile__panel {
+    transition-duration: 1ms;
+  }
+}
+
+@media (max-width: 1023px) {
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__toggle {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-mobile {
+    display: none;
+  }
+}
+
+html.nav-open {
+  overflow: hidden;
+}
+
+/* =========================================================
+   Footer — full-bleed photographic panel (matches Philosophy/Final CTA)
+   ========================================================= */
+
+.site-footer {
+  color: var(--color-text-on-dark-muted);
+  padding-block: var(--section-padding-block);
+  padding-bottom: 0 !important;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 2rem + 2vw, 4.5rem);
+}
+
+.site-footer__columns {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(2rem, 1rem + 3vw, 4rem);
+  align-items: start;
+}
+
+.site-footer__nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.site-footer__nav-col--start {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.site-footer__nav-col--end {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.site-footer__col-heading {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-on-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.site-footer__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer__menu a {
+  color: var(--color-text-on-dark-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.site-footer__menu a:hover,
+.site-footer__menu a:focus-visible {
+  color: var(--color-text-on-dark);
+}
+
+.site-footer__brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.site-footer__brand {
+  display: inline-flex;
+}
+
+.site-footer__brand-name {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-on-dark);
+}
+
+.site-footer__logo {
+  width: clamp(120px, 5vw, 76px);
+  height: clamp(120px, 5vw, 76px);
+  object-fit: contain;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: 0.4rem;
+  box-shadow: var(--shadow-md);
+}
+
+.site-footer__tagline {
+  font-size: var(--fs-small);
+  color: var(--color-text-on-dark-muted);
+  max-width: 20rem;
+}
+
+.site-footer__contact-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-footer__contact-line {
+  font-size: var(--fs-small);
+  color: var(--color-text-on-dark-muted);
+  text-decoration: none;
+}
+
+.site-footer__contact-line:hover,
+.site-footer__contact-line:focus-visible {
+  color: var(--color-text-on-dark);
+}
+
+.site-footer__bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border-on-dark);
+}
+
+.site-footer__copyright {
+  font-size: var(--fs-small);
+}
+
+.site-footer__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  text-align: end;
+}
+
+.site-footer__legal-links a {
+  font-size: var(--fs-small);
+  color: var(--color-text-on-dark-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.site-footer__legal-links a:hover,
+.site-footer__legal-links a:focus-visible {
+  color: var(--color-text-on-dark);
+}
+
+.site-footer__credit {
+  opacity: 0.75;
+}
+
+.site-footer__wordmark {
+  text-transform: uppercase;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(4.5rem, 2rem + 14vw, 13rem);
+  font-weight: var(--fw-bold);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-text-on-dark);
+  opacity: 0.14;
+  white-space: nowrap;
+  user-select: none;
+}
+
+@media (max-width: 899px) {
+  .site-footer__columns {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-footer__nav-col--start,
+  .site-footer__nav-col--end {
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-footer__bottom {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-footer__legal-links {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   Hero — scrollytelling, "Flight Path" art direction (Phase 6 redesign).
+   See PROJECT_CONTEXT.md §6.1/§8 for the design rationale.
+
+   Composition: asymmetric, left-anchored text column (not centered-over-
+   photo) inside an inset hairline frame; a directional scrim keeps the
+   text legible while leaving the image's own detail (wingtip, runway
+   vanishing point) visible on the right; a scroll-progress rail is the
+   signature element. The frame stays visually stable throughout — only
+   the image, text, and rail move — so there's always one thing moving
+   with a clear reason, not everything animating at once.
+
+   Baseline (below) renders a fully visible, static hero — correct for
+   mobile, prefers-reduced-motion, and any no-JS fallback. The >=1024px
+   block re-hides what hero-scrollytelling.js scrubs, so there's no
+   flash-of-visible-then-hidden while GSAP loads.
+   ========================================================= */
+
+.hero__pin {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--color-secondary);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__media--runway {
+  opacity: 0;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      to right,
+      rgba(var(--color-secondary-rgb), 0.9) 0%,
+      rgba(var(--color-secondary-rgb), 0.72) 28%,
+      rgba(var(--color-secondary-rgb), 0.34) 55%,
+      rgba(var(--color-secondary-rgb), 0.08) 78%
+    ),
+    linear-gradient(
+      to top,
+      rgba(var(--color-secondary-rgb), 0.55) 0%,
+      rgba(var(--color-secondary-rgb), 0) 30%
+    );
+  pointer-events: none;
+}
+
+[dir="rtl"] .hero__scrim {
+  background:
+    linear-gradient(
+      to left,
+      rgba(var(--color-secondary-rgb), 0.9) 0%,
+      rgba(var(--color-secondary-rgb), 0.72) 28%,
+      rgba(var(--color-secondary-rgb), 0.34) 55%,
+      rgba(var(--color-secondary-rgb), 0.08) 78%
+    ),
+    linear-gradient(
+      to top,
+      rgba(var(--color-secondary-rgb), 0.55) 0%,
+      rgba(var(--color-secondary-rgb), 0) 30%
+    );
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.hero__text {
+  max-width: 46rem;
+  text-align: start;
+  color: var(--color-text-on-dark);
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary-light);
+  margin-bottom: 1.5rem;
+}
+
+.hero__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 1.5em;
+  height: 2px;
+  background: currentColor;
+}
+
+.hero__heading {
+  font-size: clamp(2.75rem, 1.8rem + 4.5vw, 6rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.hero__word {
+  display: inline-block;
+}
+
+.hero__subheading {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-dark-muted);
+  max-width: 28rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero__cta-secondary {
+  color: var(--color-text-on-dark);
+}
+
+/* ---- Scroll-progress rail (signature element) ---- */
+
+.hero__progress {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: clamp(28px, 3.5vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: clamp(80px, 16vh, 160px);
+}
+
+.hero__progress-track,
+.hero__progress-fill {
+  position: absolute;
+  inset-inline: 0;
+  width: 100%;
+}
+
+.hero__progress-track {
+  top: 0;
+  bottom: 0;
+  background: rgba(244, 246, 246, 0.22);
+}
+
+.hero__progress-fill {
+  top: 0;
+  height: 100%;
+  background: var(--color-primary-light);
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+/* ---- Text: always a plain on-load fade-in, never tied to scroll ----
+   Deliberately unscoped by breakpoint — the text reveal happens once on
+   load regardless of viewport or scroll position. Only the imagery
+   (Ken-Burns drift, cross-fade) and the progress rail stay scroll-driven,
+   handled separately below / in hero-scrollytelling.js. ---- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__eyebrow,
+  .hero__heading,
+  .hero__subheading,
+  .hero__cta {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: hero-fade-up var(--dur-reveal) var(--ease-out) forwards;
+  }
+
+  .hero__eyebrow {
+    animation-delay: 0.1s;
+  }
+
+  .hero__heading {
+    animation-delay: 0.25s;
+  }
+
+  .hero__subheading {
+    animation-delay: 0.45s;
+  }
+
+  .hero__cta {
+    animation-delay: 0.6s;
+  }
+}
+
+/* ---- Mobile / fallback: autoplay Ken-Burns, no pin, no scrub ---- */
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 1023px) {
+  .hero__media--arrival img {
+    animation: hero-kenburns 20s ease-in-out infinite alternate;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero__progress {
+    display: none;
+  }
+
+  .hero__text {
+    max-width: none;
+  }
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Desktop/tablet: pre-hide what hero-scrollytelling.js scrubs ---- */
+
+@media (min-width: 1024px) {
+  .hero__media--runway {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+/* Reduced-motion always wins, even at desktop widths — full static hero. */
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .hero__media--runway {
+    opacity: 0;
+    transform: none;
+  }
+
+  .hero__progress {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Services archive pagination (core the_posts_pagination() markup)
+   ========================================================= */
+
+.pagination .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  padding-inline: 0.75rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.pagination .page-numbers:hover,
+.pagination .page-numbers:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary-dark);
+}
+
+.pagination .page-numbers.current {
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+}
+
+/* =========================================================
+   Single service
+   ========================================================= */
+
+.single-service__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+  background: color-mix(in srgb, var(--color-text-on-dark) 10%, transparent);
+  color: var(--color-primary-light);
+  border: 1px solid var(--color-border-on-dark);
+}
+
+.single-service__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* Raw the_content() output — base.css zeroes all margins and strips list
+   styling globally, so arbitrary WYSIWYG content needs its own readable
+   defaults restored here. Used by single-service.php's body and page.php's
+   generic fallback (Privacy Policy, Terms of Use, etc.) — the two places
+   that render the post editor directly rather than controlled ACF fields
+   via esc_html(). */
+.prose {
+  max-width: 42rem;
+  margin-inline: auto;
+  color: var(--color-text);
+  line-height: var(--lh-body);
+}
+
+.prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: 2rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.25rem;
+  list-style: initial;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose a {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.single-service__process {
+  max-width: 42rem;
+  margin-inline: auto;
+  margin-top: clamp(3rem, 2.5rem + 2vw, 4.5rem);
+  padding-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.single-service__cta {
+  max-width: 42rem;
+  margin-inline: auto;
+  margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  text-align: center;
+}
+
+/* =========================================================
+   404 / Search results — template-parts/components/search-form.php,
+   404.php, search.php
+   ========================================================= */
+
+.search-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  max-width: 30rem;
+  margin: 2.5rem auto 0;
+}
+
+.search-form__field {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.error-404__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.search-result__type {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.search-result .card__title {
+  margin-bottom: 0.5rem;
+}
+
+.search-result .card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-result .card__title a:hover,
+.search-result .card__title a:focus-visible {
+  color: var(--color-primary);
+}
+
+.search-no-results {
+  max-width: 32rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.search-no-results p {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 599px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form .btn {
+    width: 100%;
+  }
+}

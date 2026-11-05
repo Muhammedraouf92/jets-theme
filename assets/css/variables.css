@@ -1,0 +1,99 @@
+/**
+ * Design tokens — single source of truth for color, type, spacing, radius.
+ * See PROJECT_CONTEXT.md §7 for rationale. Never hardcode these values elsewhere.
+ */
+
+:root {
+	/* ---- Brand color ---- */
+	--color-primary: #12767e;
+	--color-primary-dark: #0b4a50;
+	--color-primary-light: #4fa9af;
+
+	--color-secondary: #0e2a30;
+	--color-secondary-rgb: 14, 42, 48;
+	--color-secondary-light: #16414a;
+
+	--color-accent-silver: #a6abae;
+
+	/* ---- Neutrals ---- */
+	--color-bg: #ffffff;
+	--color-bg-alt: #f5f6f7;
+	--color-bg-dark: #0e2a30;
+	--color-border: #e1e4e5;
+	--color-border-on-dark: rgba(245, 246, 247, 0.16);
+
+	/* ---- Text ---- */
+	--color-text: #14282b;
+	--color-text-muted: #5b6a6d;
+	--color-text-on-dark: #f4f6f6;
+	--color-text-on-dark-muted: #aebec0;
+
+	/* ---- Feedback ---- */
+	--color-success: #2f7d4f;
+	--color-error: #b3413a;
+
+	/* ---- Typography: font stacks ---- */
+	--font-heading-en: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+	--font-body-en: "Inter", "Segoe UI", sans-serif;
+	--font-heading-ar: "Cairo", "Segoe UI", sans-serif;
+	--font-body-ar: "Tajawal", "Segoe UI", sans-serif;
+
+	/* Active stack — swapped by [dir="rtl"] / html[lang="ar"] in base.css */
+	--font-heading: var(--font-heading-en);
+	--font-body: var(--font-body-en);
+
+	/* ---- Typography: weights ---- */
+	--fw-regular: 400;
+	--fw-medium: 500;
+	--fw-semibold: 600;
+	--fw-bold: 700;
+
+	/* ---- Typography: fluid scale ---- */
+	--fs-h1: clamp(2.25rem, 1.35rem + 4vw, 4.5rem);
+	--fs-h2: clamp(1.75rem, 1.15rem + 2.5vw, 3rem);
+	--fs-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+	--fs-h4: clamp(1.1rem, 1rem + 0.4vw, 1.35rem);
+	--fs-body-lg: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+	--fs-body: 1rem;
+	--fs-small: 0.875rem;
+	--fs-eyebrow: 0.8125rem;
+
+	--lh-heading: 1.15;
+	--lh-body: 1.65;
+
+	/* ---- Spacing / layout ---- */
+	--container-width: 1280px;
+	--container-width-narrow: 860px;
+	--container-padding: clamp(1.25rem, 1rem + 2.5vw, 4rem);
+	--section-padding-block: clamp(4rem, 3rem + 5vw, 8rem);
+	--section-padding-block-tight: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+	--grid-gap: clamp(1rem, 0.75rem + 1.25vw, 2rem);
+
+	/* ---- Radius ---- */
+	--radius-sm: 6px;
+	--radius-md: 14px;
+	--radius-lg: 28px;
+	--radius-pill: 999px;
+
+	/* ---- Motion ---- */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+	--dur-fast: 200ms;
+	--dur-base: 350ms;
+	--dur-slow: 650ms;
+	--dur-reveal: 800ms;
+	/* Large-scale decorative draws only (e.g. the Network backdrop's
+	   connector lines) — deliberately slower than --dur-reveal, not a
+	   duplicate of it; see PROJECT_CONTEXT.md §14 (Phase 11). */
+	--dur-slowest: 1400ms;
+
+	/* ---- Elevation ---- */
+	--shadow-sm: 0 1px 2px rgba(var(--color-secondary-rgb), 0.06), 0 1px 1px rgba(var(--color-secondary-rgb), 0.04);
+	--shadow-md: 0 8px 24px rgba(var(--color-secondary-rgb), 0.1);
+	--shadow-lg: 0 24px 64px rgba(var(--color-secondary-rgb), 0.16);
+
+	/* ---- Z-index scale ---- */
+	--z-header: 100;
+	--z-overlay: 200;
+	--z-modal: 300;
+}

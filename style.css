@@ -1,0 +1,21 @@
+/*
+Theme Name: JETS Travel & Tourism
+Theme URI: https://jets.travel
+Author: JETS
+Author URI: https://jets.travel
+Description: Bespoke bilingual (English/Arabic) theme for JETS — Integrated Travel Solutions, Global Standards. Built as a story-driven, image-forward experience for a travel management and destination-services company.
+Version: 0.1.0
+Requires at least: 6.4
+Requires PHP: 8.0
+Tested up to: 7.0
+Text Domain: jets-theme
+Domain Path: /languages
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something great.
+*/
+
+/* All actual styles live in assets/css/*.css, enqueued via inc/enqueue.php.
+   This file intentionally only carries the required theme header. */

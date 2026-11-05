@@ -1,0 +1,161 @@
+/**
+ * Layout scaffolding: container, section rhythm, grid patterns,
+ * full-bleed panels. See PROJECT_CONTEXT.md §7 for the design-system
+ * rationale — every value here reads from variables.css tokens.
+ */
+
+/* ---- Container / section rhythm ---- */
+
+.container {
+	width: 100%;
+	max-width: var(--container-width);
+	margin-inline: auto;
+	padding-inline: var(--container-padding);
+}
+
+.container--narrow {
+	max-width: var(--container-width-narrow);
+}
+
+.section {
+	padding-block: var(--section-padding-block);
+	position: relative;
+}
+
+.section--tight {
+	padding-block: var(--section-padding-block-tight);
+}
+
+.section--dark {
+	background-color: var(--color-bg-dark);
+	color: var(--color-text-on-dark);
+}
+
+.section--alt {
+	background-color: var(--color-bg-alt);
+}
+
+/* ---- Full-bleed panel pattern ----
+   Used for hero-echo moments (Philosophy, Final CTA) and any
+   image-bled section. The overlay gradient defaults to a bottom-heavy
+   scrim tuned for light text; add .panel--overlay-top to flip it. */
+
+.panel--full-bleed {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	min-height: 60vh;
+}
+
+.panel__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.panel__media img,
+.panel__media video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.panel__scrim {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background: linear-gradient(
+		to top,
+		rgba(var(--color-secondary-rgb), 0.85) 0%,
+		rgba(var(--color-secondary-rgb), 0.45) 45%,
+		rgba(var(--color-secondary-rgb), 0.15) 100%
+	);
+	pointer-events: none;
+}
+
+.panel--overlay-top .panel__scrim {
+	background: linear-gradient(
+		to bottom,
+		rgba(var(--color-secondary-rgb), 0.75) 0%,
+		rgba(var(--color-secondary-rgb), 0.35) 45%,
+		rgba(var(--color-secondary-rgb), 0.1) 100%
+	);
+}
+
+/* Footer variant: text sits throughout the panel (nav rows, center CTA,
+   bottom legal row) rather than only at one edge, so the scrim stays dark
+   top-to-bottom with a slightly lighter band mid-panel for photo depth. */
+.panel__scrim--footer {
+	background: linear-gradient(
+		180deg,
+		rgba(var(--color-secondary-rgb), 0.9) 0%,
+		rgba(var(--color-secondary-rgb), 0.68) 45%,
+		rgba(var(--color-secondary-rgb), 0.92) 100%
+	);
+}
+
+.panel__content {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+}
+
+/* ---- Grid scaffolds ---- */
+
+.grid {
+	display: grid;
+	gap: var(--grid-gap);
+}
+
+.grid--2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+/* Pillar-style grid (Why JETS): 3 columns on desktop, collapses to 2 then 1 */
+@media (max-width: 1023px) {
+	.grid--3,
+	.grid--4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 599px) {
+	.grid--2,
+	.grid--3,
+	.grid--4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Two-column split layout (About-style: media + copy), direction-aware */
+.split {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(2rem, 4vw, 5rem);
+	align-items: center;
+}
+
+.split--reverse {
+	direction: rtl;
+}
+
+.split--reverse > * {
+	direction: initial;
+}
+
+@media (max-width: 899px) {
+	.split {
+		grid-template-columns: 1fr;
+	}
+}
+

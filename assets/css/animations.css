@@ -1,0 +1,105 @@
+/**
+ * Keyframes and scroll-reveal utility classes.
+ *
+ * Every element below is toggled the same way: main.js's IntersectionObserver
+ * adds `.is-visible` once to any `[data-reveal]` element as it enters the
+ * viewport (vanilla, per PROJECT_CONTEXT.md §8 — GSAP stays reserved for the
+ * Hero's pin+scrub only). `--reveal-i` is an optional per-element stagger
+ * index set inline (`style="--reveal-i: 2"`) so a group of siblings (pillar
+ * cards, statement words) cascade instead of firing in lockstep.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+	.reveal {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+		transition-delay: calc(var(--reveal-i, 0) * 90ms);
+	}
+
+	.reveal.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+	/* Thin connecting-line motif (Philosophy) — draws start→end. */
+	.reveal-line {
+		transform: scaleX(0);
+		transform-origin: 0% 50%;
+		transition: transform var(--dur-slow) var(--ease-out);
+		transition-delay: calc(var(--reveal-i, 0) * 90ms);
+	}
+
+	.reveal-line.is-visible {
+		transform: scaleX(1);
+	}
+
+	[dir="rtl"] .reveal-line {
+		transform-origin: 100% 50%;
+	}
+
+	/* Vertical connecting-line motif (About), carried from Philosophy's
+	   horizontal one — only the pseudo-element line moves, not the whole
+	   two-column row, so it doesn't fight the media/copy's own reveals. */
+	.split--connected {
+		position: relative;
+	}
+
+	.split--connected::after {
+		content: "";
+		position: absolute;
+		inset-inline-start: 50%;
+		top: 0;
+		bottom: 0;
+		width: 2px;
+		background: linear-gradient(180deg, transparent, var(--color-primary), transparent);
+		transform: scaleY(0);
+		transition: transform var(--dur-slow) var(--ease-out);
+		transition-delay: calc(var(--reveal-i, 0) * 90ms);
+	}
+
+	.split--connected.is-visible::after {
+		transform: scaleY(1);
+	}
+
+	@media (max-width: 899px) {
+		.split--connected::after {
+			display: none;
+		}
+	}
+
+	/* Image clip-path wipe (About media). */
+	.reveal-media img {
+		clip-path: inset(0 0 0 100%);
+		transition: clip-path var(--dur-reveal) var(--ease-out);
+		transition-delay: calc(var(--reveal-i, 0) * 90ms);
+	}
+
+	.reveal-media.is-visible img {
+		clip-path: inset(0 0 0 0%);
+	}
+
+	[dir="rtl"] .reveal-media img {
+		clip-path: inset(0 100% 0 0);
+	}
+
+	[dir="rtl"] .reveal-media.is-visible img {
+		clip-path: inset(0 0 0 0%);
+	}
+
+	/* Word-by-word reveal (Philosophy statement). Each .reveal-word carries
+	   its own --reveal-i; the parent .reveal-words only needs one
+	   IntersectionObserver entry to cascade all of them. */
+	.reveal-words .reveal-word {
+		display: inline-block;
+		opacity: 0;
+		transform: translateY(0.35em);
+		transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+		transition-delay: calc(var(--reveal-i, 0) * 60ms);
+	}
+
+	.reveal-words.is-visible .reveal-word {
+		opacity: 1;
+		transform: none;
+	}
+}
